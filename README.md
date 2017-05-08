@@ -1,1 +1,3 @@
-# Robotics-and-Automation
+# Robotics & Automation
+
+Progress of projects
