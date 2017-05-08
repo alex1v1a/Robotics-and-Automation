@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  8 MAY 2017 14:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  8 MAY 2017 16:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -147,21 +147,54 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count95
+\lst@gtempboxa=\box28
+\lst@token=\toks20
+\lst@length=\count96
+\lst@currlwidth=\dimen117
+\lst@column=\count97
+\lst@pos=\count98
+\lst@lostspace=\dimen118
+\lst@width=\dimen119
+\lst@newlines=\count99
+\lst@lineno=\count100
+\lst@maxwidth=\dimen120
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count101
+\lst@skipnumbers=\count102
+\lst@framebox=\box29
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count103
+\float@exts=\toks21
+\float@box=\box30
+\@float@everytoks=\toks22
+\@floatcapt=\box31
+)
 (./OpenCV 1 Report.aux)
 \openout1 = `"OpenCV 1 Report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -199,17 +232,17 @@ LaTeX Font Info:    ... okay on input line 24.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count95
-\scratchdimen=\dimen117
-\scratchbox=\box28
-\nofMPsegments=\count96
-\nofMParguments=\count97
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count98
-\MPscratchDim=\dimen118
-\MPnumerator=\count99
-\makeMPintoPDFobject=\count100
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count104
+\scratchdimen=\dimen121
+\scratchbox=\box32
+\nofMPsegments=\count105
+\nofMParguments=\count106
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count107
+\MPscratchDim=\dimen122
+\MPnumerator=\count108
+\makeMPintoPDFobject=\count109
+\everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -254,7 +287,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box29
+\AtBeginShipoutBox=\box33
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
@@ -264,28 +297,29 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
+\c@lstlisting=\count110
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 26.
+(Font)              <12> on input line 30.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 26.
+(Font)              <8> on input line 30.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 26.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
+(Font)              <6> on input line 30.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 30.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 26.
+(Font)              <5> on input line 30.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
 
 <images/opencv.jpg, id=1, 597.432pt x 178.0251pt>
 File: images/opencv.jpg Graphic file (type jpg)
  <use images/opencv.jpg>
-Package pdftex.def Info: images/opencv.jpg used on input line 29.
+Package pdftex.def Info: images/opencv.jpg used on input line 33.
 (pdftex.def)             Requested size: 452.9679pt x 134.97992pt.
 
 [1
@@ -300,36 +334,120 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
  [2
 
-] [1
+]
+<images/Image_1.jpg, id=20, 3083.52pt x 1734.48pt>
+File: images/Image_1.jpg Graphic file (type jpg)
+ <use images/Image_1.jpg>
+Package pdftex.def Info: images/Image_1.jpg used on input line 74.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
 
-] [2]
+[1
+
+ <./images/Image_1.jpg>]
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
+<images/GreyScale.jpg, id=24, 3083.52pt x 1734.48pt>
+File: images/GreyScale.jpg Graphic file (type jpg)
+
+<use images/GreyScale.jpg>
+Package pdftex.def Info: images/GreyScale.jpg used on input line 94.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+ [2
+
+ <./images/GreyScale.jpg>]
+<images/Blurred.jpg, id=29, 3083.52pt x 1734.48pt>
+File: images/Blurred.jpg Graphic file (type jpg)
+ <use images/Blurred.jpg>
+Package pdftex.def Info: images/Blurred.jpg used on input line 114.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+
+[3
+
+ <./images/Blurred.jpg>] <images/Mag.jpg, id=33, 3083.52pt x 1734.48pt>
+File: images/Mag.jpg Graphic file (type jpg)
+
+<use images/Mag.jpg>
+Package pdftex.def Info: images/Mag.jpg used on input line 143.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+ <images/Angle.jpg, id=34, 3083.52pt x 1734.48pt>
+File: images/Angle.jpg Graphic file (type jpg)
+
+<use images/Angle.jpg>
+Package pdftex.def Info: images/Angle.jpg used on input line 149.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+ [4
+
+ <./images/Mag.jpg> <./images/Angle.jpg>]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 165.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 169.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 169.
+ [5]
+<images/MaxSuppression.jpg, id=44, 3083.52pt x 1734.48pt>
+File: images/MaxSuppression.jpg Graphic file (type jpg)
+
+<use images/MaxSuppression.jpg>
+Package pdftex.def Info: images/MaxSuppression.jpg used on input line 216.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+ [6
+
+ <./images/MaxSuppression.jpg>] [7
+
+]
+<images/Final.jpg, id=51, 3083.52pt x 1734.48pt>
+File: images/Final.jpg Graphic file (type jpg)
+ <use images/Final.jpg>
+Package pdftex.def Info: images/Final.jpg used on input line 277.
+(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+
+[8
+
+ <./images/Final.jpg>]
 No file "OpenCV 1 Report".bbl.
-[3] [4
+[9
 
-] (./OpenCV 1 Report.aux) ) 
+] [10
+
+] [11] [12] [13] (./OpenCV 1 Report.aux) ) 
 Here is how much of TeX's memory you used:
- 3413 strings out of 493014
- 49490 string characters out of 6133351
- 124697 words of memory out of 5000000
- 6901 multiletter control sequences out of 15000+600000
- 9144 words of font info for 33 fonts, out of 8000000 for 9000
+ 4997 strings out of 493014
+ 72724 string characters out of 6133351
+ 351869 words of memory out of 5000000
+ 8450 multiletter control sequences out of 15000+600000
+ 9490 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,39p,880b,322s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t9.pfb>
-Output written on "OpenCV 1 Report.pdf" (6 pages, 242717 bytes).
+ 38i,11n,60p,767b,1483s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmtt9.pfb>
+Output written on "OpenCV 1 Report.pdf" (15 pages, 12490585 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 113 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -43,9 +43,6 @@ int main(int, char** argv){
 	//Save images
 	imwrite("Mag.jpg", mag);
 	imwrite("Angle.jpg", angle);
-	//imwrite("Gradx", gradx);
-	//imwrite("Grady", grady);
-
 	
 	maxsuppression = maxsuppress(mag, angle);
 	imwrite("MaxSuppression.jpg", maxsuppression);
@@ -58,9 +55,10 @@ int main(int, char** argv){
 		}
 	}
 
-	threshold(maxsuppression, maxsuppression, 245, 255, 0);
+	cv::Mat temp;
+	threshold(maxsuppression, temp, 245, 255, 0);
 	
-	imwrite("Final.jpg", maxsuppression);
+	imwrite("Final.jpg", temp);
 
 	waitKey(27);
 	destroyAllWindows();
@@ -137,7 +135,6 @@ Mat maxsuppress(Mat mag, Mat angle){
 }
 
 void hysterysis(int y, int x, Mat *suppress) {
-	Mat finalimage;
 	if (suppress->at<float>(y, x + 1) == 100) {
 		suppress->at<float>(y, x + 1) = 255.0;
 		hysterysis(y, x + 1, suppress);
