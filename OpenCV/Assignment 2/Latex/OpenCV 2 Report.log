@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  8 MAY 2017 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  13 MAY 2017 20:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -180,7 +180,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks22
 \@floatcapt=\box31
 )
-No file "OpenCV 2 Report".aux.
+(./OpenCV 2 Report.aux)
 \openout1 = `"OpenCV 2 Report.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
@@ -195,6 +195,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -324,22 +325,22 @@ Package pdftex.def Info: images/opencv.jpg used on input line 33.
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/opencv.jpg>]
-No file "OpenCV 2 Report".toc.
+s/opencv.jpg>] (./OpenCV 2 Report.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+)
 \tf@toc=\write3
 \openout3 = `"OpenCV 2 Report.toc"'.
 
-[2
+ [2
 
-] <images/Image_1.jpg, id=18, 3083.52pt x 1734.48pt>
-File: images/Image_1.jpg Graphic file (type jpg)
-
-<use images/Image_1.jpg>
-Package pdftex.def Info: images/Image_1.jpg used on input line 74.
+]
+<images/1.jpg, id=20, 1541.76pt x 867.24pt>
+File: images/1.jpg Graphic file (type jpg)
+ <use images/1.jpg>
+Package pdftex.def Info: images/1.jpg used on input line 78.
 (pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
- [1
 
- <./images/Image_1.jpg>]
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -349,106 +350,115 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-<images/GreyScale.jpg, id=23, 3083.52pt x 1734.48pt>
-File: images/GreyScale.jpg Graphic file (type jpg)
-
-<use images/GreyScale.jpg>
-Package pdftex.def Info: images/GreyScale.jpg used on input line 94.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
- [2
-
- <./images/GreyScale.jpg>]
-<images/Blurred.jpg, id=28, 3083.52pt x 1734.48pt>
-File: images/Blurred.jpg Graphic file (type jpg)
- <use images/Blurred.jpg>
-Package pdftex.def Info: images/Blurred.jpg used on input line 114.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
-
-[3
-
- <./images/Blurred.jpg>] <images/Mag.jpg, id=32, 3083.52pt x 1734.48pt>
-File: images/Mag.jpg Graphic file (type jpg)
-
-<use images/Mag.jpg>
-Package pdftex.def Info: images/Mag.jpg used on input line 143.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
- <images/Angle.jpg, id=33, 3083.52pt x 1734.48pt>
-File: images/Angle.jpg Graphic file (type jpg)
-
-<use images/Angle.jpg>
-Package pdftex.def Info: images/Angle.jpg used on input line 149.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
- [4
-
- <./images/Mag.jpg> <./images/Angle.jpg>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 165.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 169.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
+ [1
 
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+ <./images/1.jpg>]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 89.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 169.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 169.
- [5]
-<images/MaxSuppression.jpg, id=44, 3083.52pt x 1734.48pt>
-File: images/MaxSuppression.jpg Graphic file (type jpg)
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 89.
 
-<use images/MaxSuppression.jpg>
-Package pdftex.def Info: images/MaxSuppression.jpg used on input line 216.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 89--90
+[][] 
+ []
+
+[2] <images/HSV.jpg, id=30, 770.88pt x 433.62pt>
+File: images/HSV.jpg Graphic file (type jpg)
+ <use images/HSV.jpg>
+Package pdftex.def Info: images/HSV.jpg used on input line 156.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
+ [3
+
+ <./images/HSV.jpg>] <images/Thresholding.jpg, id=34, 770.88pt x 433.62pt>
+File: images/Thresholding.jpg Graphic file (type jpg)
+
+<use images/Thresholding.jpg>
+Package pdftex.def Info: images/Thresholding.jpg used on input line 186.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
+ [4 <./images/Thresholding.jpg>]
+<images/Dilation.jpg, id=38, 770.88pt x 433.62pt>
+File: images/Dilation.jpg Graphic file (type jpg)
+ <use images/Dilation.jpg>
+Package pdftex.def Info: images/Dilation.jpg used on input line 214.
+(pdftex.def)             Requested size: 226.48395pt x 127.39409pt.
+
+<images/Erosion.jpg, id=39, 770.88pt x 433.62pt>
+File: images/Erosion.jpg Graphic file (type jpg)
+ <use images/Erosion.jpg>
+Package pdftex.def Info: images/Erosion.jpg used on input line 220.
+(pdftex.def)             Requested size: 226.48395pt x 127.39409pt.
+
+[5
+
+ <./images/Dilation.jpg> <./images/Erosion.jpg>]
+<images/Blur.jpg, id=44, 770.88pt x 433.62pt>
+File: images/Blur.jpg Graphic file (type jpg)
+ <use images/Blur.jpg>
+Package pdftex.def Info: images/Blur.jpg used on input line 244.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
  [6
 
- <./images/MaxSuppression.jpg>] [7
+ <./images/Blur.jpg>] [7
+
+] [8
 
 ]
-<images/Final.jpg, id=51, 3083.52pt x 1734.48pt>
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 334--335
+[][] 
+ []
+
+<images/Final.jpg, id=54, 770.88pt x 433.62pt>
 File: images/Final.jpg Graphic file (type jpg)
  <use images/Final.jpg>
-Package pdftex.def Info: images/Final.jpg used on input line 277.
-(pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+Package pdftex.def Info: images/Final.jpg used on input line 345.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
+ [9
 
-[8
+ <./images/Final.jpg>] (./OpenCV 2 Report.bbl) [10
 
- <./images/Final.jpg>]
-No file "OpenCV 2 Report".bbl.
-[9
+]
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 419--420
+[][] 
+ []
 
-] [10
+[11
 
-] [11] [12] [13] (./OpenCV 2 Report.aux)
+] [12] [13] [14]
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 617--618
+[][] 
+ []
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[15] (./OpenCV 2 Report.aux) ) 
 Here is how much of TeX's memory you used:
- 4993 strings out of 493014
- 72644 string characters out of 6133351
- 351808 words of memory out of 5000000
- 8450 multiletter control sequences out of 15000+600000
+ 5174 strings out of 493014
+ 74617 string characters out of 6133351
+ 384502 words of memory out of 5000000
+ 8625 multiletter control sequences out of 15000+600000
  9490 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,60p,767b,1483s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on "OpenCV 2 Report.pdf" (15 pages, 12486636 bytes).
+ 38i,11n,60p,510b,1586s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t9.pfb>
+Output written on "OpenCV 2 Report.pdf" (17 pages, 1005110 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

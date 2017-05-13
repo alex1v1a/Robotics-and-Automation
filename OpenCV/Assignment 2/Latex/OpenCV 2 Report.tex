@@ -42,7 +42,7 @@
 
 \begin{abstract}
 
-A brief report on OpenCV edge image detection without using Canny function. Each step was tested and an out image saved to the local folder when running the program to ensure a best rendered results; these results can be tuned with the given functions in the program.
+A brief report on OpenCV object and colour detection. Each step was tested and an out image saved to the local folder when running the program to ensure a best rendered results, and easy debugging; these results can be tuned with the given functions in the program.
 
 \end{abstract}
 
@@ -61,209 +61,266 @@ A brief report on OpenCV edge image detection without using Canny function. Each
 
 OpenCV (Open Source Computer Vision Library) is an open source machine learning library for visual components. It has been widely accepted as one of the worlds most used image processing tools, and has the capability of static and dynamic comprehension. Some of the basic features available in OpenCV are capable mapping environments to be used in demonstration such as self driving cars lane detection. 
 
-The process in this project to achieve is to design a program in the Visual Studio environment, using the OpenCV library that will render an images edges. OpenCV is a powerful tool for image processing with more then 2500 algorithms available in its library; by using several functions within the OpenCV library excluding Canny, a processed image will produce an output of the edges. 
+The process in this project to achieve is to design a program in the Visual Studio environment, using the OpenCV library that will detect an objects location and colour, in this case, red, blue, and yellow tennis balls. OpenCV is a powerful tool for image processing with more then 2500 algorithms available in its library; by using several functions within the OpenCV library, a processed image will produce these values. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{METHOD}
 
-An image has been provided of different colour tennis balls on a table. The process will involve deconstructing this image to the rendered edges only through several filters to provide the best matched edge.
+An image has been provided of different colour tennis balls on a table. The process will involve filtering this image to a workable standard in which detection can be made of the circular objects and their respected colours. 
+
+A prompt will be given to the user to select which image to process and find the balls with their colours; the user can cycle back to the main image selection and select another image to process. The program can be closed by selecting the esc key from the prompt menu. The image is then loaded to memory and with each step through the detection the image is saved for easy debugging. 
+
+After the user has selected a desired image to process the location function is called to preform the action. The sequence begins with the original image as shown below (set one from the five images are used for demo purposes in this report)
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/Image_1}
+  \includegraphics[width=\linewidth]{images/1}
   \caption{Original Image}
   \label{fig:Original Image}
 \end{figure}
 
 A full break down of the process has been attached and can be found in the code in the appendix.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\subsection{Greyscale}
-
-Using the greyscale function to convert the image to black and white will help reduce the processing errors.
+The following code is the process for user input and the function call for location.
 
 \begin{lstlisting}[language = C++]
-	//Convert to greyscale
-	cvtColor(image, greyscale, CV_BGR2GRAY);
-	imwrite("Grey Scale.jpg", greyscale);	//Save greyscale
-\end{lstlisting} 
+int main() {
+	cout << "Choose an image to locate the tennis ball: 1, 2, 3, 4, 5...\n\npress esc to quit\n\n-------------------------------------------------------------------------\n" << endl;
+	while (1) {
+		namedWindow("User Select", CV_WINDOW_AUTOSIZE);
+		switch (waitKey(0)) {
+		case 27: // Exit prompt "esc"
+			return 0;
+		case 49: // Image 1 selected
+			setpoint = 1;
+			name = "1.jpg";
+			location();
+			break;
+		case 50: // Image 2 selected
+			setpoint = 2;
+			name = "2.jpg";
+			location();
+			break;
+		case 51: // Image 3 selected
+			setpoint = 3;
+			name = "3.jpg";
+			location();
+			break;
+		case 52: // Image 4 selected
+			setpoint = 4;
+			name = "4.jpg";
+			location();
+			break;
+		case 53: // Image 5 selected
+			setpoint = 5;
+			name = "5.jpg";
+			location();
+			break;
+		}
+	}
+	return 0;
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{BGR to HSV conversion}
+
+After the location function has been called, the image is read into memory and resized for processing. The aspect ratio of the first image was different then the others so it has been scaled accordingly. The HSV conversion is ready to begin, using the cvtColor function to convert the image to HSV (BGR2HSV) will help in the detection processing; the image is then saved for debugging.
+
+\begin{lstlisting}[language = C++]
+	// Read the image to memory and resize
+	image = imread(name);
+	if (setpoint != 1) {
+		resize(image, image, Size(), 0.3, 0.3);
+	}
+	// Note that the aspect ratio of image 1 is significantly different than the others, these values provide better results
+	else if (setpoint = 1) {
+		resize(image, image, Size(), 0.5, 0.5);
+	}
+
+	// Copy origional image for end results edit
+	imageFinal = image;
+
+	// Step 1, Convert BGR to HSV
+	cvtColor(image, hsv, COLOR_BGR2HSV);
+
+	// After conversion save for reference
+	//imshow("HSV", hsv); //Debugging feature
+	nameh << namehsv << setpoint << ".jpg";
+	imwrite(nameh.str(), hsv);
+\end{lstlisting}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/GreyScale}
-  \caption{Greyscale filter}
-  \label{fig:Greyscale filter}
+  \includegraphics[width=\linewidth]{images/HSV}
+  \caption{BGR to HSV conversion}
+  \label{fig:BGR to HSV conversion}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Thresholding}
+
+When calculating the threshold, the range is found from the HSV image checking with 2 pass through arrays. The array values given are scalar and are formed from the colours horizontal, vertical and scale values; when the range is found it writes to the output colour respectively then is added together and assigned to the image thres. Choosing only the selected colours we want from the image, yellow, red and blue; bearing in mind the hsv format of the image is the key step for this.
+
+\begin{lstlisting}[language = C++]
+	// Step 2, Thresholding 
+	// Check to find if arrays are in range
+	Mat blue, red, yellow;
+	inRange(hsv, Scalar(bHzLo, BSLow, bVrLo), Scalar(bHzHi, bScHi, bVrHi), blue);
+	inRange(hsv, Scalar(rHzLo, RSLow, rVrLo), Scalar(rHzHi, rScHi, rVrHi), red);
+	inRange(hsv, Scalar(yHzLo, yScLo, yVrLo), Scalar(yHzHi, yScHi, yVrHi), yellow);
+	
+	// Calculate the sum for 2 arrays twice 
+	add(blue, red, thres);
+	add(thres, yellow, thres);
+
+	// After thresholding save for reference
+	//imshow("Thresholding", thres); //Debugging feature
+	namet << namethres << setpoint << ".jpg";
+	imwrite(namet.str(), thres);
+\end{lstlisting}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/Thresholding}
+  \caption{The process effect of thresholding}
+  \label{fig:The process effect of thresholding}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Dilation \& Erosion}
+
+Using the dilation function the image begins to form more solid shapes and removes discrepancies to better form solid filled in shapes. The erosion function then emphasises those shapes making it easier for the shape identifier later on. The best values found for the size of the morph ellipse are as shown below.
+
+\begin{lstlisting}[language = C++]
+	// Step 3, Dilation and errosion used for multi level channel processing 
+	dilate(thres, dilation, getStructuringElement(MORPH_ELLIPSE, Size(11, 11)));
+	erode(dilation, errosion, getStructuringElement(MORPH_ELLIPSE, Size(3, 3)));
+
+	// After dilation save for reference
+	//imshow("Dilation", dilation); //Debugging feature
+	named << namedilation << setpoint << ".jpg";
+	imwrite(named.str(), dilation);
+
+	// After errosion save for reference
+	//imshow("Errosion", errosion); //Debugging feature
+	namee << nameerrosion << setpoint << ".jpg";
+	imwrite(namee.str(), errosion);
+\end{lstlisting}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth/2]{images/Dilation}
+  \caption{The process effect of dilation}
+  \label{fig:The process effect of dilation}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth/2]{images/Erosion}
+  \caption{The process effect of erosion}
+  \label{fig:The process effect of erosion}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \subsection{Gaussian Blur}
 
-The Gaussian blur and smoothing is used to reduce the noise of the image to help eliminate any external influences. The function will transform the image using convolution matrix, and will give a result based on each pixel and it's surrounding pixels to contour and blur while maintaining the edges integerity.
+The Gaussian blur is used to reduce the noise of the image and smoothing the edges to help eliminate any external influences when finding the shape and give a more accurate average of the pixels. The function will transform the image using convolution matrix, and will give a result based on each pixel and it's surrounding pixels to contour and blur while maintaining the edges integrity.
 
-From the naked eye it may be hard to recognise this from the image below and the previous observed; but if the image is enlarged you can clearly see the edges and pixels blended slightly.
+After the Gaussian process, the image is finally ready to be searched, the image is then passed to the function "ball" as an address to access via pointer. The best values for the Gaussian have found to be a 7x7 matrix with 
 
 \begin{lstlisting}[language = C++]
-	//Noise reduction
-	GaussianBlur(greyscale, blurred, Size(5, 5), 1.4);
-	imwrite("Blurred.jpg", greyscale);		
+	// Step 4, Preform Gaussian blur to further bilter image and reduce noise to better detect the raound point for the circles
+	GaussianBlur(errosion, blur, Size(7, 7), 2.5, 2.5);
+
+	// After Gaussian blur save for reference
+	//imshow("Gaussian Blur", blur); //Debugging feature
+	nameb << nameblur << setpoint << ".jpg";
+	imwrite(nameb.str(), blur);		
 \end{lstlisting}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/Blurred}
+  \includegraphics[width=\linewidth]{images/Blur}
   \caption{Noise reduction with Gaussian Blur}
   \label{fig:Noise reduction with Gaussian Blur}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Hough Circles}
 
-\subsection{Sobel operator}
+Using the HoughCircles function to properly identify the tennis ball radius and thus the position of the center points of each tennis ball. Originally used the Blob function however the Hough method gave better results as the edges were detected pixel by pixel around the edge of each ball. 
 
-The Sobel operator combines the Gaussian blur and differentiation, and is used to find an approximation of the gradient; then process and detect the edges and produce an edge map. This is a two stage process in respect to calculating two derivatives, and may only be done correctly if the original image is converted to greyscale. The result of the first step will give two outputs, each convolution gradient in the x and y directions respectfully; in the second step it will combine the two gradient direction's from the outputs in step one and produce a final output.
+Complications arose from background colours when a ball was near another similar colour object such as the ice cream container, cup and exercise book. The problem was looked at but a solution for distinguishing these objects from one another could not be established without partial circle, or more specific shadow filtering with correct proportion size.
 
 \begin{lstlisting}[language = C++]
-	//Grad X
-	Sobel(blurred, gradx, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT);
-
-	//Grad Y
-	Sobel(blurred, grady, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT);
+	// Step 5, Using the HoughCircles function to identify the tennis ball radius
+	// Originally used the Blob function however this method gave better results
+	HoughCircles(readyImage, ball, CV_HOUGH_GRADIENT, 2, dis, hThres, lThres, minRad, maxRad);
+	for (size_t k = 0; k < ball.size(); k++) {
+		Point center(cvRound(ball[k][0]), cvRound(ball[k][1]));
+		// Establish and mark the center points
+		int y = center.y, x = center.x;
+		
+		// Step 6, Meeting the criteria for the region of interest, ignore rest
+		if ((roiXmin < x) && (x < roiXmax) && (roiYmin < y) && (y < roiYmax)) {
+			for (int m = x - 5; m < x + 5; m++) {
+				for (int n = y - 5; n < y + 5; n++) {
+					Vec3b colorr = imageFinal.at<Vec3b>(n, m);
+					meanr.val[0] = (colorr.val[0] + meanr.val[0]) / 2;
+					meanr.val[1] = (colorr.val[1] + meanr.val[1]) / 2;
+					meanr.val[2] = (colorr.val[2] + meanr.val[2]) / 2;
+				}
+			}
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\subsection{Magnitude \& Angle}
+\subsection{Labelling the targets found}
+
+After looping through and finding all positions and saving the regions of interest the values are then marked and ready for labelling. The putText and circle functions are used to briefly label each tennis balls center point, outer path and defined colour red, yellow, or blue.
 
 \begin{lstlisting}[language = C++]
-	//Magnitude, Angle
-	cartToPolar(gradx, grady, mag, angle, true);
-\end{lstlisting}
+			// Step 7, Font formatting and placement, standard fonts origionating from center point of each ball
+			// Marking of each ball with center points
+			int font = FONT_HERSHEY_SIMPLEX, thick = 1;
+			float scale = 0.5;
+			Point org(x, y);
+			string colour;
 
-\begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/Mag}
-  \caption{Magnitude transformations}
-  \label{fig:Magnitude transformations}
-\end{figure}
-
-\begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/Angle}
-  \caption{Angle transformations}
-  \label{fig:Angle transformations}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Non Maximum Suppression}
-
-Going through all the pixels and and finding the surrounding pixels meeting the requirements at each point in respect to one another, then writing to that pixel if it what is found to be an edge white, or if found some requirements met write pixel grey, else non of the conditions were met and write the pixel black.
-
-Below is a function called to find the Non Maximum Suppression render, thresholding also takes place simultaneously to this stage.
-
-\begin{lstlisting}[language = C++]
-//Non Max Suppression
-Mat maxsuppress(Mat mag, Mat angle){
-	Mat suppress;
-	float clr;
-	suppress = Mat(mag.rows, mag.cols, CV_32F);
-	for (int y = 1; y < mag.rows - 1; y++) {
-		for (int x = 1; x < mag.cols - 1; x++) {
-			float anglem = angle.at<float>(y, x);
-			if (((anglem > 337.5) && (anglem <= 0)) || ((anglem <= 22.5) && (anglem > 0)) || ((anglem > 157.5) && (anglem <= 202.5))){
-				//Thresholding takes place here, code removed for reference 
-				suppress.at<float>(y, x) = clr;
+			int radius = int(ball[k][2]);
+			if ((meanr.val[0] > b1 && meanr.val[1] < b2 && meanr.val[2] < b3)
+				|| (meanr.val[0] == 1 && meanr.val[1] == 252 && meanr.val[2] == 251)) {
+				// Label each target found
+				colour = "Blue";
+				putText(imageFinal, colour, org, font, scale, Scalar(255, 0, 0), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(255, 0, 0), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(255, 0, 0), 1, 5, 0);
 			}
-			if (((anglem > 22.5) && (anglem <= 67.5)) || ((anglem > 202.5) && (anglem <= 247.5))){
-				//Thresholding takes place here, code removed for reference 
-				suppress.at<float>(y, x) = clr;
-			}
-			if (((anglem > 67.5) && (anglem <= 112.5)) || ((anglem > 245.5) && (anglem <= 292.5))){
-				//Thresholding takes place here, code removed for reference 
-				suppress.at<float>(y, x) = clr;
-			}
-			if (((anglem > 112.5) && (anglem <= 157.5)) || ((anglem > 292.5) && (anglem <= 337.5))){
-				//Thresholding takes place here, code removed for reference 
-				suppress.at<float>(y, x) = clr;
+			if (meanr.val[0] < y1 && meanr.val[1] > y2 && meanr.val[2] > y3
+				&& (meanr.val[0] != 1 && meanr.val[1] != 252 && meanr.val[2] != 251)) {
+				// Label each target found
+				colour = "Yellow";
+				putText(imageFinal, colour, org, font, scale, Scalar(0, 255, 255), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(0, 255, 255), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 255, 255), 1, 5, 0);
+			}			
+			if (meanr.val[0] < r1 && meanr.val[1] < r2 && meanr.val[2] > r3) {
+				// Label each target found
+				colour = "Red";
+				putText(imageFinal, colour, org, font, scale, Scalar(0, 0, 255), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(0, 0, 255), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 0, 255), 1, 5, 0);
 			}
 		}
 	}
-	return suppress;
-}
+
 \end{lstlisting}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\subsection{Thresholding}
-
-Along side the Non Maximum Suppression, once a value has been found the threshold will check to see if the value is greater or lower then the set point, and in turn write the pixel white or grey; if these conditions are not met then the pixel will be made black.
-
-\begin{lstlisting}[language = C++]
-				//Thresholding
-				if ((mag.at<float>(y, x - 1) < mag.at<float>(y, x)) && (mag.at<float>(y, x) > mag.at<float>(y, x + 1))){
-					if (mag.at<float>(y, x) > 70) {
-						clr = 255.0;
-					}
-					if ((mag.at<float>(y, x) < 70) && (mag.at<float>(y, x) < 1))
-						clr = 100.0;
-				}
-				else {
-					clr = 0.0;
-				}
-\end{lstlisting}
-
-\begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/MaxSuppression}
-  \caption{Non Maximum Suppression with Thresholding}
-  \label{fig:Non Maximum Suppression with Thresholding}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\subsection{Hysteresis}
-
-The Hysteresis recursive function is the called to edit the non-maximum suppression image via a pointer, and will enhance all the lines connecting the whites where possible.
-
-\begin{lstlisting}[language = C++]
-void hysterysis(int y, int x, Mat *suppress) {
-	if (suppress->at<float>(y, x + 1) == 100) {
-		suppress->at<float>(y, x + 1) = 255.0;
-		hysterysis(y, x + 1, suppress);
-	}
-	if (suppress->at<float>(y, x - 1) == 100) {
-		suppress->at<float>(y, x - 1) = 255.0;
-		hysterysis(y, x - 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x) == 100) {
-		suppress->at<float>(y + 1, x) = 255.0;
-		hysterysis(y + 1, x, suppress);
-	}
-	if (suppress->at<float>(y - 1, x) == 100) {
-		suppress->at<float>(y - 1, x) = 255.0;
-		hysterysis(y - 1, x, suppress);
-	}
-	if (suppress->at<float>(y - 1, x + 1) == 100) {
-		suppress->at<float>(y - 1, x + 1) = 255.0;
-		hysterysis(y - 1, x + 1, suppress);
-	}
-	if (suppress->at<float>(y - 1, x - 1) == 100) {
-		suppress->at<float>(y - 1, x - 1) = 255.0;
-		hysterysis(y - 1, x - 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x + 1) == 100) {
-		suppress->at<float>(y + 1, x + 1) = 255.0;
-		hysterysis(y + 1, x + 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x - 1) == 100) {
-		suppress->at<float>(y + 1, x - 1) = 255.0;
-		hysterysis(y + 1, x - 1, suppress);
-	}
-	else { 
-		suppress->at<float>(y,x) = 0.0;
-	}
-}
-\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,40 +328,57 @@ void hysterysis(int y, int x, Mat *suppress) {
 
 \section{RESULTS}
 
-The final result from original image, to the final image of rendered edges only.
+After the processing is complete the original image is displayed with the labels for each tennis ball found. The final result is shown below.
+
+\begin{lstlisting}[language = C++]
+	cout << "Congradulations! Processing complete here are the tennis balls found with their respected colours!\n\npress any key to go back to main menu, or hit esc twice to quit\n\n-------------------------------------------------------------------------\n" << endl;
+	// Step 8, After processing and locating tennis balls and colours complete, display final results, and save for reference
+	namer << nameready << setpoint << ".jpg";
+	imwrite(namer.str(), imageFinal);
+	imshow(name, imageFinal); 
+	// Wait for key press before returning to main menu
+	waitKey(0);
+	destroyAllWindows();
+\end{lstlisting}
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{images/Final}
-  \caption{The final image is given of the edges only}
-  \label{fig:The final image is given of the edges only}
+  \caption{The final image is given with detected results}
+  \label{fig:The final image is given with detected results}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Fine Tuning} 
-While the process is straight forward and consists of step by step operations, the procedure in which required fine tuning. This involves checking the matrix at different points and the threshold values.
+
+While the process is straight forward and consists of step by step operations, the procedure in which required fine tuning. This involves checking the matrix at different points like the threshold values, dilation and erosion, the Gaussian blur, as well as the HoughCircles and region of interest.
+
+The specific values were fiddled with to find the best combination and then tested.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\clearpage
 \subsection{Testing}
+
+Ensure the target of finding the location of every tennis ball in each image is achieved, and that the colour of each ball is given.
+
 Each step has an output image saved to check the processes respectively. The images are checked to make sure each stage is completing the task correctly, if not the code is then referred to and further revisions are made.
+
+Every image was tested with the values for recognition and tweaked in the fine tuning process to get the best possible results.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Finalising}
-Making the program stable and concise, and as robust as possible builds for a good design. The method of testing all effects of the convolution matrix that might effect the system is required to make this achievable in getting the desired edge values. 
+
+Making the program stable and concise, and as robust as possible builds for a good design. Checking over the functions and any redundant code, ensure a good user interface is easily workable and the outputs are all correct.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
 \section{CONCLUSIONS}
 
-The final image detection and edge render has been produced from several steps; this method while not exact is a basic idea of how the Canny operator works. The steps taken were to use the OpenCV functions to greyscale the image, then take that converted colour and run it through Gaussian blurring to reduce noise. After the transformation and noise reduction the Sobel operator is called to determine the gradients, and then cartToPolar function is used to convert these gradients to magnitudes and angles. The Non Suppression filter is then implemented with a threshold to produce more stable lines for the edges; and finally the Hysteresis stage is called to reduce the noise and threshold function to get rid of any grey static left over.
-
-The result of the described method has been found similar to that of the canny detection method and the edges, while not perfectly shown are in the correct areas.
+The final detection of the tennis balls has been produced from several steps. This method provides basic filtering similar to that from assignment one before the processing locations are to be found. The filtering is to provide more accurate and stable results, and the HoughCircles detection was found better then the Blob function when tested. There were still some discrepancies with the output when processing the tennis balls with similar colour backgrounds.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -320,179 +394,235 @@ The result of the described method has been found similar to that of the canny d
 \section*{APPENDIX}
 
 \begin{lstlisting}[language = C++]
-#include <opencv2\opencv.hpp>
-#include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
+// Marc Alexander Sferrazza 12164165
+// Referenceing from http://docs.opencv.org/2.4/
 
+#include <opencv2\opencv.hpp>
+#include <opencv2\core.hpp>
+#include <opencv2\imgcodecs.hpp>
+#include <opencv2\highgui.hpp>
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sstream>
 
 using namespace cv;
 using namespace std;
 
-Mat maxsuppress(Mat mag, Mat angle);
-void hysterysis(int y, int x, Mat *suppress);
+void location();
 
-int main(int, char** argv){
+int setpoint;
+string name;
 
-	Mat image, greyscale, blurred, maxsuppression, finalimage;
-	
-	//Read in the image
-	image = imread("Image 1.jpg", IMREAD_COLOR);   
-
-	//Convert to greyscale
-	cvtColor(image, greyscale, CV_BGR2GRAY);
-	imwrite("Grey Scale.jpg", greyscale);	//Save greyscale
-
-	//Noise reduction
-	GaussianBlur(greyscale, blurred, Size(5, 5), 1.4);
-	imwrite("Blurred.jpg", greyscale);		//Save blurred
-
-	//Gradient
-	Mat gradx, grady, mag, angle;
-	int scale = 2, delta = 0, ddepth = CV_32F;
-
-	//Grad X
-	Sobel(blurred, gradx, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT);
-
-	//Grad Y
-	Sobel(blurred, grady, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT);
-
-	//Magnitude, Angle
-	cartToPolar(gradx, grady, mag, angle, true);
-
-	//Save images
-	imwrite("Mag.jpg", mag);
-	imwrite("Angle.jpg", angle);
-
-	maxsuppression = maxsuppress(mag, angle);
-	imwrite("MaxSuppression.jpg", maxsuppression);
-
-	for (int y = 1; y < mag.rows - 1; y++) {
-		for (int x = 1; x < mag.cols - 1; x++) {
-			if (mag.at<float>(y, x) == 255.0) {
-				hysterysis(mag.rows, mag.cols, &maxsuppression);
-			}
+int main() {
+	cout << "Choose an image to locate the tennis ball: 1, 2, 3, 4, 5...\n\npress esc to quit\n\n-------------------------------------------------------------------------\n" << endl;
+	while (1) {
+		namedWindow("User Select", CV_WINDOW_AUTOSIZE);
+		switch (waitKey(0)) {
+		case 27: // Exit prompt "esc"
+			return 0;
+		case 49: // Image 1 selected
+			setpoint = 1;
+			name = "1.jpg";
+			location();
+			break;
+		case 50: // Image 2 selected
+			setpoint = 2;
+			name = "2.jpg";
+			location();
+			break;
+		case 51: // Image 3 selected
+			setpoint = 3;
+			name = "3.jpg";
+			location();
+			break;
+		case 52: // Image 4 selected
+			setpoint = 4;
+			name = "4.jpg";
+			location();
+			break;
+		case 53: // Image 5 selected
+			setpoint = 5;
+			name = "5.jpg";
+			location();
+			break;
 		}
 	}
-
-	threshold(maxsuppression, maxsuppression, 245, 255, 0);
-	
-	imwrite("Final.jpg", maxsuppression);
-
-	waitKey(27);
-	destroyAllWindows();
 	return 0;
 }
 
-//Non Max Suppression
-Mat maxsuppress(Mat mag, Mat angle){
-	Mat suppress;
-	float clr;
-	suppress = Mat(mag.rows, mag.cols, CV_32F);
-	for (int y = 1; y < mag.rows - 1; y++) {
-		for (int x = 1; x < mag.cols - 1; x++) {
-			float anglem = angle.at<float>(y, x);
-			if (((anglem > 337.5) && (anglem <= 0)) || ((anglem <= 22.5) && (anglem > 0)) || ((anglem > 157.5) && (anglem <= 202.5))){
-				//Thresholding
-				if ((mag.at<float>(y, x - 1) < mag.at<float>(y, x)) && (mag.at<float>(y, x) > mag.at<float>(y, x + 1))){
-					if (mag.at<float>(y, x) > 70) {
-						clr = 255.0;
-					}
-					if ((mag.at<float>(y, x) < 70) && (mag.at<float>(y, x) < 1))
-						clr = 100.0;
+void location() {
+	Mat image, hsv, thres, dilation, errosion, blur, readyImage, imageFinal;
+	
+	int yHzLo, yHzHi, yScLo, yScHi, yVrLo, yVrHi;
+	int rHzLo, rHzHi, RSLow, rScHi, rVrLo, rVrHi;
+	int bHzLo, bHzHi, BSLow, bScHi, bVrLo, bVrHi;
+	int roiXmin, roiXmax, roiYmin, roiYmax;
+	int r1, r2, r3, b1, b2, b3, y1, y2, y3;
+	int hThres, lThres, dis, minRad, maxRad;
+
+	// Naming the saved output files for reference
+	ostringstream nameh, namet, named, namee, nameb, namer;
+	string namehsv, namethres, namedilation, nameerrosion, nameblur, nameready;
+	// Image save locations
+	namehsv = "Output/1.HSV Image ";
+	namethres = "Output/2.Thresholding Image ";
+	namedilation = "Output/3.Dilation Image ";
+	nameerrosion = "Output/4.Errosion Image ";
+	nameblur = "Output/5.GaussianBlur Image ";
+	nameready = "Output/6.Final Result Image ";
+
+	// Read the image to memory and resize
+	image = imread(name);
+	if (setpoint != 1) {
+		resize(image, image, Size(), 0.3, 0.3);
+	}
+	// Note that the aspect ratio of image 1 is significantly different than the others, these values provide better results
+	else if (setpoint = 1) {
+		resize(image, image, Size(), 0.5, 0.5);
+	}
+
+	// Copy origional image for end results edit
+	imageFinal = image;
+
+	// Step 1, Convert BGR to HSV
+	cvtColor(image, hsv, COLOR_BGR2HSV);
+
+	// After conversion save for reference
+	//imshow("HSV", hsv); //Debugging feature
+	nameh << namehsv << setpoint << ".jpg";
+	imwrite(nameh.str(), hsv);
+
+	int rval[5][36] = {
+		{ 31, 0, 142, 60, 255, 255, 0, 186, 69, 179, 213, 255, 53, 206, 51, 179, 255, 255, 300, 700, 50, 470, 100, 100, 100, 90, 50, 30, 100, 100, 100, 150, 50, 30, 10, 40 },
+		{ 153, 148, 128, 179, 227, 255, 90, 121, 0, 114, 255, 255, 22, 63, 148, 89, 198, 255, 260, 700, 170, 470, 110, 100, 100, 100, 130, 50, 140, 180, 110, 150, 50, 30, 10, 40 },
+		{ 21, 142, 146, 43, 255, 255, 0, 148, 75, 7, 255, 255, 92, 178, 8, 150, 255, 225, 260, 700, 50, 470, 50, 40, 70, 20, 30,20, 10, 160, 160, 126, 42, 30, 5, 40 },
+		{ 18, 194, 57, 35, 255, 255, 0, 190, 69, 6, 255, 255, 107, 176, 45, 112, 255, 255, 260, 700, 50, 470, 60, 65, 67, 34, 85, 88, 100, 100, 100, 82, 34, 30, 10, 40 },
+		{ 17, 190, 99, 49, 255, 255, 0, 144, 81, 8, 215, 190, 105, 168, 24, 157, 255, 204, 260, 600, 170, 470, 100, 100, 100, 66, 70, 61, 100, 100, 100, 100, 33, 30, 10, 40 }
+	};
+
+	int *propd[36] = {
+		&yHzLo, &yScLo, &yVrLo, &yHzHi, &yScHi, &yVrHi,
+		&rHzLo, &RSLow, &rVrLo, &rHzHi, &rScHi, &rVrHi,
+		&bHzLo, &BSLow, &bVrLo, &bHzHi, &bScHi, &bVrHi,
+		&roiXmin, &roiXmax, &roiYmin, &roiYmax,
+		&r1, &r2, &r3, &b1, &b2, &b3, &y1, &y2, &y3,
+		&hThres, &lThres, &dis, &minRad, &maxRad
+	};
+
+	// Set random numbers to the array
+	for (int k = 0; k < 36; k++) {
+		*propd[k] = rval[setpoint - 1][k];
+	}
+
+	// Step 2, Thresholding 
+	// Check to find if arrays are in range
+	Mat blue, red, yellow;
+	inRange(hsv, Scalar(bHzLo, BSLow, bVrLo), Scalar(bHzHi, bScHi, bVrHi), blue);
+	inRange(hsv, Scalar(rHzLo, RSLow, rVrLo), Scalar(rHzHi, rScHi, rVrHi), red);
+	inRange(hsv, Scalar(yHzLo, yScLo, yVrLo), Scalar(yHzHi, yScHi, yVrHi), yellow);
+	
+	// Calculate the sum for 2 arrays twice 
+	add(blue, red, thres);
+	add(thres, yellow, thres);
+
+	// After thresholding save for reference
+	//imshow("Thresholding", thres); //Debugging feature
+	namet << namethres << setpoint << ".jpg";
+	imwrite(namet.str(), thres);
+
+	// Step 3, Dilation and errosion used for multi level channel processing 
+	dilate(thres, dilation, getStructuringElement(MORPH_ELLIPSE, Size(11, 11)));
+	erode(dilation, errosion, getStructuringElement(MORPH_ELLIPSE, Size(3, 3)));
+
+	// After dilation save for reference
+	//imshow("Dilation", dilation); //Debugging feature
+	named << namedilation << setpoint << ".jpg";
+	imwrite(named.str(), dilation);
+
+	// After errosion save for reference
+	//imshow("Errosion", errosion); //Debugging feature
+	namee << nameerrosion << setpoint << ".jpg";
+	imwrite(namee.str(), errosion);
+
+	// Step 4, Preform Gaussian blur to further bilter image and reduce noise to better detect the raound point for the circles
+	GaussianBlur(errosion, blur, Size(7, 7), 2.5, 2.5);
+
+	// After Gaussian blur save for reference
+	//imshow("Gaussian Blur", blur); //Debugging feature
+	nameb << nameblur << setpoint << ".jpg";
+	imwrite(nameb.str(), blur);
+
+	// Assign the filtered image to readyImage for location processing
+	readyImage = blur;
+	vector<Vec3f> ball;
+	Vec3b meanr;
+
+	// Step 5, Using the HoughCircles function to identify the tennis ball radius
+	// Originally used the Blob function however this method gave better results
+	HoughCircles(readyImage, ball, CV_HOUGH_GRADIENT, 2, dis, hThres, lThres, minRad, maxRad);
+	for (size_t k = 0; k < ball.size(); k++) {
+		Point center(cvRound(ball[k][0]), cvRound(ball[k][1]));
+		// Establish and mark the center points
+		int y = center.y, x = center.x;
+
+		// Step 6, Meeting the criteria for the region of interest, ignore rest
+		if ((roiXmin < x) && (x < roiXmax) && (roiYmin < y) && (y < roiYmax)) {
+			for (int m = x - 5; m < x + 5; m++) {
+				for (int n = y - 5; n < y + 5; n++) {
+					Vec3b colorr = imageFinal.at<Vec3b>(n, m);
+					meanr.val[0] = (colorr.val[0] + meanr.val[0]) / 2;
+					meanr.val[1] = (colorr.val[1] + meanr.val[1]) / 2;
+					meanr.val[2] = (colorr.val[2] + meanr.val[2]) / 2;
 				}
-				else {
-					clr = 0.0;
-				}
-				suppress.at<float>(y, x) = clr;
 			}
-			if (((anglem > 22.5) && (anglem <= 67.5)) || ((anglem > 202.5) && (anglem <= 247.5))){
-				//Thresholding
-				if ((mag.at<float>(y, x - 1) < mag.at<float>(y, x)) && (mag.at<float>(y, x) > mag.at<float>(y, x + 1))){
-					if (mag.at<float>(y, x) > 70) {
-						clr = 255.0;
-					}
-					if ((mag.at<float>(y, x) < 70) && (mag.at<float>(y, x) < 1))
-						clr = 100.0;
-				}
-				else {
-					clr = 0.0;
-				}
-				suppress.at<float>(y, x) = clr;
+
+			// Step 7, Font formatting and placement, standard fonts origionating from center point of each ball
+			// Marking of each ball with center points
+			int font = FONT_HERSHEY_SIMPLEX, thick = 1;
+			float scale = 0.5;
+			Point org(x, y);
+			string colour;
+
+			int radius = int(ball[k][2]);
+			if ((meanr.val[0] > b1 && meanr.val[1] < b2 && meanr.val[2] < b3)
+				|| (meanr.val[0] == 1 && meanr.val[1] == 252 && meanr.val[2] == 251)) {
+				// Label each target found
+				colour = "Blue";
+				putText(imageFinal, colour, org, font, scale, Scalar(255, 0, 0), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(255, 0, 0), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(255, 0, 0), 1, 5, 0);
 			}
-			if (((anglem > 67.5) && (anglem <= 112.5)) || ((anglem > 245.5) && (anglem <= 292.5))){
-				//Thresholding
-				if ((mag.at<float>(y, x - 1) < mag.at<float>(y, x)) && (mag.at<float>(y, x) > mag.at<float>(y, x + 1))){
-					if (mag.at<float>(y, x) > 70) {
-						clr = 255.0;
-					}
-					if ((mag.at<float>(y, x) < 70) && (mag.at<float>(y, x) < 1))
-						clr = 100.0;
-				}
-				else {
-					clr = 0.0;
-				}
-				suppress.at<float>(y, x) = clr;
-			}
-			if (((anglem > 112.5) && (anglem <= 157.5)) || ((anglem > 292.5) && (anglem <= 337.5))){
-				//Thresholding
-				if ((mag.at<float>(y, x - 1) < mag.at<float>(y, x)) && (mag.at<float>(y, x) > mag.at<float>(y, x + 1))){
-					if (mag.at<float>(y, x) > 70) {
-						clr = 255.0;
-					}
-					if ((mag.at<float>(y, x) < 70) && (mag.at<float>(y, x) < 1))
-						clr = 100.0;
-				}
-				else {
-					clr = 0.0;
-				}
-				suppress.at<float>(y, x) = clr;
+			if (meanr.val[0] < y1 && meanr.val[1] > y2 && meanr.val[2] > y3
+				&& (meanr.val[0] != 1 && meanr.val[1] != 252 && meanr.val[2] != 251)) {
+				// Label each target found
+				colour = "Yellow";
+				putText(imageFinal, colour, org, font, scale, Scalar(0, 255, 255), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(0, 255, 255), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 255, 255), 1, 5, 0);
+			}			
+			if (meanr.val[0] < r1 && meanr.val[1] < r2 && meanr.val[2] > r3) {
+				// Label each target found
+				colour = "Red";
+				putText(imageFinal, colour, org, font, scale, Scalar(0, 0, 255), thick, 5);
+				// Highlight each target with designating colour and mark the center points
+				circle(imageFinal, center, radius, Scalar(0, 0, 255), 1, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 0, 255), 1, 5, 0);
 			}
 		}
 	}
-	return suppress;
+	cout << "Congradulations! Processing complete here are the tennis balls found with their respected colours!\n\npress any key to go back to main menu, or hit esc twice to quit\n\n-------------------------------------------------------------------------\n" << endl;
+	// Step 8, After processing and locating tennis balls and colours complete, display final results, and save for reference
+	namer << nameready << setpoint << ".jpg";
+	imwrite(namer.str(), imageFinal);
+	imshow(name, imageFinal); 
+	// Wait for key press before returning to main menu
+	waitKey(0);
+	destroyAllWindows();
 }
-
-void hysterysis(int y, int x, Mat *suppress) {
-	if (suppress->at<float>(y, x + 1) == 100) {
-		suppress->at<float>(y, x + 1) = 255.0;
-		hysterysis(y, x + 1, suppress);
-	}
-	if (suppress->at<float>(y, x - 1) == 100) {
-		suppress->at<float>(y, x - 1) = 255.0;
-		hysterysis(y, x - 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x) == 100) {
-		suppress->at<float>(y + 1, x) = 255.0;
-		hysterysis(y + 1, x, suppress);
-	}
-	if (suppress->at<float>(y - 1, x) == 100) {
-		suppress->at<float>(y - 1, x) = 255.0;
-		hysterysis(y - 1, x, suppress);
-	}
-	if (suppress->at<float>(y - 1, x + 1) == 100) {
-		suppress->at<float>(y - 1, x + 1) = 255.0;
-		hysterysis(y - 1, x + 1, suppress);
-	}
-	if (suppress->at<float>(y - 1, x - 1) == 100) {
-		suppress->at<float>(y - 1, x - 1) = 255.0;
-		hysterysis(y - 1, x - 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x + 1) == 100) {
-		suppress->at<float>(y + 1, x + 1) = 255.0;
-		hysterysis(y + 1, x + 1, suppress);
-	}
-	if (suppress->at<float>(y + 1, x - 1) == 100) {
-		suppress->at<float>(y + 1, x - 1) = 255.0;
-		hysterysis(y + 1, x - 1, suppress);
-	}
-	else { 
-		suppress->at<float>(y,x) = 0.0;
-	}
-}
-
 \end{lstlisting}
 
 \end{document}
