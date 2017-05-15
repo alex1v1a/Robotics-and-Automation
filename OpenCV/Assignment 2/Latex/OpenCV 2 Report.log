@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  13 MAY 2017 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  15 MAY 2017 01:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -340,8 +340,10 @@ File: images/1.jpg Graphic file (type jpg)
  <use images/1.jpg>
 Package pdftex.def Info: images/1.jpg used on input line 78.
 (pdftex.def)             Requested size: 452.9679pt x 254.78818pt.
+ [1
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+ <./images/1.jpg>] (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstla
+ng1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -352,11 +354,9 @@ File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
- [1
-
- <./images/1.jpg>]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 89.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
@@ -366,10 +366,12 @@ Overfull \hbox (23.03674pt too wide) in paragraph at lines 89--90
 [][] 
  []
 
-[2] <images/HSV.jpg, id=30, 770.88pt x 433.62pt>
+[2
+
+] <images/HSV.jpg, id=30, 770.88pt x 433.62pt>
 File: images/HSV.jpg Graphic file (type jpg)
  <use images/HSV.jpg>
-Package pdftex.def Info: images/HSV.jpg used on input line 156.
+Package pdftex.def Info: images/HSV.jpg used on input line 158.
 (pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
  [3
 
@@ -377,70 +379,69 @@ Package pdftex.def Info: images/HSV.jpg used on input line 156.
 File: images/Thresholding.jpg Graphic file (type jpg)
 
 <use images/Thresholding.jpg>
-Package pdftex.def Info: images/Thresholding.jpg used on input line 186.
+Package pdftex.def Info: images/Thresholding.jpg used on input line 198.
 (pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
- [4 <./images/Thresholding.jpg>]
+ [4]
 <images/Dilation.jpg, id=38, 770.88pt x 433.62pt>
 File: images/Dilation.jpg Graphic file (type jpg)
  <use images/Dilation.jpg>
-Package pdftex.def Info: images/Dilation.jpg used on input line 214.
-(pdftex.def)             Requested size: 226.48395pt x 127.39409pt.
+Package pdftex.def Info: images/Dilation.jpg used on input line 226.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
 
-<images/Erosion.jpg, id=39, 770.88pt x 433.62pt>
+[5 <./images/Thresholding.jpg>]
+<images/Erosion.jpg, id=43, 770.88pt x 433.62pt>
 File: images/Erosion.jpg Graphic file (type jpg)
  <use images/Erosion.jpg>
-Package pdftex.def Info: images/Erosion.jpg used on input line 220.
-(pdftex.def)             Requested size: 226.48395pt x 127.39409pt.
+Package pdftex.def Info: images/Erosion.jpg used on input line 232.
+(pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
 
-[5
-
- <./images/Dilation.jpg> <./images/Erosion.jpg>]
-<images/Blur.jpg, id=44, 770.88pt x 433.62pt>
+[6 <./images/Dilation.jpg> <./images/Erosion.jpg>]
+<images/Blur.jpg, id=47, 770.88pt x 433.62pt>
 File: images/Blur.jpg Graphic file (type jpg)
  <use images/Blur.jpg>
-Package pdftex.def Info: images/Blur.jpg used on input line 244.
+Package pdftex.def Info: images/Blur.jpg used on input line 256.
 (pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
- [6
+ [7
 
- <./images/Blur.jpg>] [7
+ <./images/Blur.jpg>] [8
 
-] [8
+] [9
 
 ]
-Overfull \hbox (23.03674pt too wide) in paragraph at lines 334--335
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 352--353
 [][] 
  []
 
-<images/Final.jpg, id=54, 770.88pt x 433.62pt>
+<images/Final.jpg, id=57, 770.88pt x 433.62pt>
 File: images/Final.jpg Graphic file (type jpg)
  <use images/Final.jpg>
-Package pdftex.def Info: images/Final.jpg used on input line 345.
+Package pdftex.def Info: images/Final.jpg used on input line 363.
 (pdftex.def)             Requested size: 452.9679pt x 254.79478pt.
- [9
+ [10
 
- <./images/Final.jpg>] (./OpenCV 2 Report.bbl) [10
+ <./images/Final.jpg>] (./OpenCV 2 Report.bbl) [11
 
 ]
-Overfull \hbox (23.03674pt too wide) in paragraph at lines 419--420
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 439--440
 [][] 
  []
 
-[11
+[12
 
-] [12] [13] [14]
-Overfull \hbox (23.03674pt too wide) in paragraph at lines 617--618
+] [13] [14] [15]
+Overfull \hbox (23.03674pt too wide) in paragraph at lines 637--638
 [][] 
  []
 
-[15] (./OpenCV 2 Report.aux) ) 
+[16] (./OpenCV 2 Report.aux) ) 
 Here is how much of TeX's memory you used:
- 5174 strings out of 493014
- 74617 string characters out of 6133351
- 384502 words of memory out of 5000000
- 8625 multiletter control sequences out of 15000+600000
+ 5176 strings out of 493014
+ 74641 string characters out of 6133351
+ 382848 words of memory out of 5000000
+ 8627 multiletter control sequences out of 15000+600000
  9490 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,60p,510b,1586s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,60p,1062b,1481s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
@@ -455,10 +456,10 @@ m/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 t9.pfb>
-Output written on "OpenCV 2 Report.pdf" (17 pages, 1005110 bytes).
+Output written on "OpenCV 2 Report.pdf" (18 pages, 1009719 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

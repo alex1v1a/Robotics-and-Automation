@@ -3,11 +3,11 @@
 \contentsline {subsection}{\numberline {2.1}BGR to HSV conversion}{3}
 \contentsline {subsection}{\numberline {2.2}Thresholding}{4}
 \contentsline {subsection}{\numberline {2.3}Dilation \& Erosion}{5}
-\contentsline {subsection}{\numberline {2.4}Gaussian Blur}{6}
-\contentsline {subsection}{\numberline {2.5}Hough Circles}{7}
-\contentsline {subsection}{\numberline {2.6}Labelling the targets found}{8}
-\contentsline {section}{\numberline {3}RESULTS}{9}
-\contentsline {subsection}{\numberline {3.1}Fine Tuning}{9}
-\contentsline {subsection}{\numberline {3.2}Testing}{10}
-\contentsline {subsection}{\numberline {3.3}Finalising}{10}
-\contentsline {section}{\numberline {4}CONCLUSIONS}{10}
+\contentsline {subsection}{\numberline {2.4}Gaussian Blur}{7}
+\contentsline {subsection}{\numberline {2.5}Hough Circles and Region of Interest}{8}
+\contentsline {subsection}{\numberline {2.6}Labelling the targets found}{9}
+\contentsline {section}{\numberline {3}RESULTS}{10}
+\contentsline {subsection}{\numberline {3.1}Fine Tuning}{10}
+\contentsline {subsection}{\numberline {3.2}Testing}{11}
+\contentsline {subsection}{\numberline {3.3}Finalising}{11}
+\contentsline {section}{\numberline {4}CONCLUSIONS}{11}

@@ -70,7 +70,7 @@ The process in this project to achieve is to design a program in the Visual Stud
 
 An image has been provided of different colour tennis balls on a table. The process will involve filtering this image to a workable standard in which detection can be made of the circular objects and their respected colours. 
 
-A prompt will be given to the user to select which image to process and find the balls with their colours; the user can cycle back to the main image selection and select another image to process. The program can be closed by selecting the esc key from the prompt menu. The image is then loaded to memory and with each step through the detection the image is saved for easy debugging. 
+As there are five images the option to run the process with all outputs was first made, but then the decision of what images to check was implemented using the case keys 1, 2, 3, 4, 5, esc - A prompt will be given to the user to select which image to process and find the balls with their colours; the user can cycle back to the main image selection and select another image to process. The program can be closed by selecting the esc key from the prompt menu. The image is then loaded to memory and with each step through the detection the image is saved for easy debugging.  
 
 After the user has selected a desired image to process the location function is called to preform the action. The sequence begins with the original image as shown below (set one from the five images are used for demo purposes in this report)
 
@@ -80,10 +80,10 @@ After the user has selected a desired image to process the location function is 
   \label{fig:Original Image}
 \end{figure}
 
-A full break down of the process has been attached and can be found in the code in the appendix.
+\clearpage
+A full break down of the process has been attached and can be found in the code in the appendix. The following code is the process for user input and the function call for location.
 
-The following code is the process for user input and the function call for location.
-
+\
 \begin{lstlisting}[language = C++]
 int main() {
 	cout << "Choose an image to locate the tennis ball: 1, 2, 3, 4, 5...\n\npress esc to quit\n\n-------------------------------------------------------------------------\n" << endl;
@@ -127,7 +127,9 @@ int main() {
 \clearpage
 \subsection{BGR to HSV conversion}
 
-After the location function has been called, the image is read into memory and resized for processing. The aspect ratio of the first image was different then the others so it has been scaled accordingly. The HSV conversion is ready to begin, using the cvtColor function to convert the image to HSV (BGR2HSV) will help in the detection processing; the image is then saved for debugging.
+After the location function has been called, the image is read into memory and resized for processing. The aspect ratio of the first image was different then the others so it has been scaled accordingly. Complications arose from background colours when a ball was near another similar colour object such as the ice cream container, cup and exercise book, which is why the range needed to be limited.
+
+In order to make the process more definite a conversion to HSV is necessary, this will make the process more robust by converting a BGR; The 8 bit 3 colour channel is converted to the huge, saturation and value which can be analysed more specifically easier in the provided functions. The HSV conversion is ready to begin, using the cvtColor function to convert the image to HSV (BGR2HSV) will help in the detection processing; the image is then saved for debugging.
 
 \begin{lstlisting}[language = C++]
 	// Read the image to memory and resize
@@ -162,7 +164,17 @@ After the location function has been called, the image is read into memory and r
 
 \subsection{Thresholding}
 
-When calculating the threshold, the range is found from the HSV image checking with 2 pass through arrays. The array values given are scalar and are formed from the colours horizontal, vertical and scale values; when the range is found it writes to the output colour respectively then is added together and assigned to the image thres. Choosing only the selected colours we want from the image, yellow, red and blue; bearing in mind the hsv format of the image is the key step for this.
+When calculating the threshold, the range is found from the HSV image checking with 2 pass through arrays. The output will be a binary and help in detecting the edges of each ball like the first assignment with the canny function. As HSV has a specific range it is easily identifiable in each part however the image hue range (0-179) and saturation, value (0-255) may adjust with respect to lighting and depth, surrounding variables and factors to consider such as reflections and so on.
+
+The array values given are scalar and are formed from the colours horizontal, vertical and scale values; when the range is found it writes to the output colour respectively then is added together and assigned to the image thres. Choosing only the selected colours we want from the image, yellow, red and blue; bearing in mind the hsv format of the image is the key step for this. 
+
+The range and effected variables are difficult to establish, and while the paint colour detection tool is a standard feature on most computers nowadays it is not a practical method to address this solution; Luckily OpenCV provides a method to adjust these control levels to help find the limits for each image without too much fuss.
+
+When preforming the tasks on each image the values may differ, therefore a multi-dimensional array has been set up to handle processing values for each image, making it simpler to process all the images in a more dynamic sense, these have been called through in different parts beginning here as the r-values. The rval's are read into each set of numeracies for the specific image when the location function is called, depending on what Image was chosen the corresponding pre-determined values are used. These have been found by using create trackers to measure the best values for high and low thresholds, hsv values, etc.
+
+After the limits are found for the hsv for the tennis balls, the range limits are then set for thresholding. After each range has been completed the image will only show for that selected hsv value, so after finding the yellow, blue, and red ranges for the balls the image is merged to one range image with al there values; as the only known function to do this takes 2 arrays at a time the values are added twice.
+
+\
 
 \begin{lstlisting}[language = C++]
 	// Step 2, Thresholding 
@@ -189,10 +201,10 @@ When calculating the threshold, the range is found from the HSV image checking w
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
+
 \subsection{Dilation \& Erosion}
 
-Using the dilation function the image begins to form more solid shapes and removes discrepancies to better form solid filled in shapes. The erosion function then emphasises those shapes making it easier for the shape identifier later on. The best values found for the size of the morph ellipse are as shown below.
+Using the dilation function the image begins to form more solid shapes and removes discrepancies to better form solid filled in shapes, by adding pixels to the boundaries found of objects and shapes in a greyscale image. The erosion function then emphasises those shapes making it easier for the shape identifier later on by removing pixels from the boundaries of objects. The best values found for the size of the morphological operations are as shown below.
 
 \begin{lstlisting}[language = C++]
 	// Step 3, Dilation and errosion used for multi level channel processing 
@@ -211,13 +223,13 @@ Using the dilation function the image begins to form more solid shapes and remov
 \end{lstlisting}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth/2]{images/Dilation}
+  \includegraphics[width=\linewidth]{images/Dilation}
   \caption{The process effect of dilation}
   \label{fig:The process effect of dilation}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth/2]{images/Erosion}
+  \includegraphics[width=\linewidth]{images/Erosion}
   \caption{The process effect of erosion}
   \label{fig:The process effect of erosion}
 \end{figure}
@@ -226,13 +238,13 @@ Using the dilation function the image begins to form more solid shapes and remov
 \clearpage
 \subsection{Gaussian Blur}
 
-The Gaussian blur is used to reduce the noise of the image and smoothing the edges to help eliminate any external influences when finding the shape and give a more accurate average of the pixels. The function will transform the image using convolution matrix, and will give a result based on each pixel and it's surrounding pixels to contour and blur while maintaining the edges integrity.
+The Gaussian blur is used to reduce the noise of the image and smoothing the edges to help eliminate any external influences when finding the shape and give a more accurate average of the pixels. The function will transform the image using convolution matrix Gaussian kernel, and will give a result based on each pixel and it's surrounding pixels to contour and blur while maintaining the edges integrity.
 
-After the Gaussian process, the image is finally ready to be searched, the image is then passed to the function "ball" as an address to access via pointer. The best values for the Gaussian have found to be a 7x7 matrix with 
+After the Gaussian process, the image is finally ready to be searched and labeled. The best values for the Gaussian have found to be a 7x7 kernel matrix with a 2.5 standard deviation. The image is saved for reference and then assigned to a new image for final searching and editing.
 
 \begin{lstlisting}[language = C++]
-	// Step 4, Preform Gaussian blur to further bilter image and reduce noise to better detect the raound point for the circles
-	GaussianBlur(errosion, blur, Size(7, 7), 2.5, 2.5);
+	// Step 4, Preform Gaussian blur to further filter image and reduce noise to better detect the around point for the circles
+	GaussianBlur(erosion, blur, Size(7, 7), 2.5, 2.5);
 
 	// After Gaussian blur save for reference
 	//imshow("Gaussian Blur", blur); //Debugging feature
@@ -248,11 +260,13 @@ After the Gaussian process, the image is finally ready to be searched, the image
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\subsection{Hough Circles}
+\subsection{Hough Circles and Region of Interest}
 
-Using the HoughCircles function to properly identify the tennis ball radius and thus the position of the center points of each tennis ball. Originally used the Blob function however the Hough method gave better results as the edges were detected pixel by pixel around the edge of each ball. 
+Using the HoughCircles function to properly identify the tennis ball radius and thus the position of the center points of each tennis ball. Originally the Blob function was used, however the Hough method gave better results as the edges were detected pixel by pixel around the edge of each ball. The Hough algorithm works by voting on the shapes found with the parameters space local maxima to find certain shapes, in this case a circle thus HoughCircles. The pass through variables to the function for any image is given as an 8 bit single channel (greyscale), an output 3 element float vector with position and radius, the inverse ratio of the accumulator resolution to image resolution for this example being half. The minimum distance between each circle which changes depending on the image, the high and low threshold values typically being scaled by 3 from each other with the lower bing more sensitive to edges and in turn allowing more detection of possible shapes; the final parameters are the minimum and maximum circle radius.
 
-Complications arose from background colours when a ball was near another similar colour object such as the ice cream container, cup and exercise book. The problem was looked at but a solution for distinguishing these objects from one another could not be established without partial circle, or more specific shadow filtering with correct proportion size.
+Complications arose from background colours when a ball was near another similar colour object such as the ice cream container, cup and exercise book. The problem was looked at but a solution for distinguishing these objects from one another could not be established without partial circle, or more specific shadow filtering with correct proportion size. There is lots of noise on the left of the image due to some regions and the similar colours or threshold values, unfortunately it is unable to automatically ignore this sector so to simply cut it out the region of interest is set so only the tennis balls in this sector (the table) are recognised. 
+
+A loop is then preformed to import the coordinates of the circles to location and colour matching, then the pixels are averaged from the surrounding pixels to assess the correct colour of each ball to match the colour to the positions.
 
 \begin{lstlisting}[language = C++]
 	// Step 5, Using the HoughCircles function to identify the tennis ball radius
@@ -279,7 +293,9 @@ Complications arose from background colours when a ball was near another similar
 \clearpage
 \subsection{Labelling the targets found}
 
-After looping through and finding all positions and saving the regions of interest the values are then marked and ready for labelling. The putText and circle functions are used to briefly label each tennis balls center point, outer path and defined colour red, yellow, or blue.
+After looping through and finding all positions and colours the tennis balls are now ready for labelling. The putText and circle functions are used to briefly label each tennis balls center point, outer path and defined colour red, yellow, or blue. The coordinates are stored with the vec3f for reference so that only the colour referencing needs access to write the placements. Due to the enclosing area having breaks the average area of the ball is counted for the placement only, this means it will ignore then lines on the ball and take the basic shape.
+
+The comparisons are made and the image is colour matched correctly with corresponding colours and locations, then the default drawing function is used to draw a circle enclosing the ball. The colours enclosing and text will match each tennis ball.
 
 \begin{lstlisting}[language = C++]
 			// Step 7, Font formatting and placement, standard fonts origionating from center point of each ball
@@ -296,8 +312,8 @@ After looping through and finding all positions and saving the regions of intere
 				colour = "Blue";
 				putText(imageFinal, colour, org, font, scale, Scalar(255, 0, 0), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(255, 0, 0), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(255, 0, 0), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(255, 0, 0), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(255, 0, 0), 0, 5, 0);
 			}
 			if (meanr.val[0] < y1 && meanr.val[1] > y2 && meanr.val[2] > y3
 				&& (meanr.val[0] != 1 && meanr.val[1] != 252 && meanr.val[2] != 251)) {
@@ -305,16 +321,16 @@ After looping through and finding all positions and saving the regions of intere
 				colour = "Yellow";
 				putText(imageFinal, colour, org, font, scale, Scalar(0, 255, 255), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(0, 255, 255), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(0, 255, 255), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(0, 255, 255), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 255, 255), 0, 5, 0);
 			}			
 			if (meanr.val[0] < r1 && meanr.val[1] < r2 && meanr.val[2] > r3) {
 				// Label each target found
 				colour = "Red";
 				putText(imageFinal, colour, org, font, scale, Scalar(0, 0, 255), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(0, 0, 255), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(0, 0, 255), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(0, 0, 255), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 0, 255), 0, 5, 0);
 			}
 		}
 	}
@@ -328,7 +344,9 @@ After looping through and finding all positions and saving the regions of intere
 
 \section{RESULTS}
 
-After the processing is complete the original image is displayed with the labels for each tennis ball found. The final result is shown below.
+After the processing is complete the original image is displayed with the labels for each tennis ball found. The final result is shown below, the process is now successfully completed and the demonstration is complete. The user can now press any key to go back and select another image, or after closing the image hit the "esc" key to exit the program.
+
+A sample of the results can be seen below.
 
 \begin{lstlisting}[language = C++]
 	cout << "Congradulations! Processing complete here are the tennis balls found with their respected colours!\n\npress any key to go back to main menu, or hit esc twice to quit\n\n-------------------------------------------------------------------------\n" << endl;
@@ -379,6 +397,8 @@ Making the program stable and concise, and as robust as possible builds for a go
 \section{CONCLUSIONS}
 
 The final detection of the tennis balls has been produced from several steps. This method provides basic filtering similar to that from assignment one before the processing locations are to be found. The filtering is to provide more accurate and stable results, and the HoughCircles detection was found better then the Blob function when tested. There were still some discrepancies with the output when processing the tennis balls with similar colour backgrounds.
+
+The object detection was a success in sense but limited to that of this projects constraints. To better match solutions in the real world further algorithms would need to be acquired that are higher in focus, resolution, and more adaptive with environmental features for dynamic or moving objects with changing scenery and backgrounds, or if the camera is moving also.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -592,8 +612,8 @@ void location() {
 				colour = "Blue";
 				putText(imageFinal, colour, org, font, scale, Scalar(255, 0, 0), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(255, 0, 0), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(255, 0, 0), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(255, 0, 0), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(255, 0, 0), 0, 5, 0);
 			}
 			if (meanr.val[0] < y1 && meanr.val[1] > y2 && meanr.val[2] > y3
 				&& (meanr.val[0] != 1 && meanr.val[1] != 252 && meanr.val[2] != 251)) {
@@ -601,16 +621,16 @@ void location() {
 				colour = "Yellow";
 				putText(imageFinal, colour, org, font, scale, Scalar(0, 255, 255), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(0, 255, 255), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(0, 255, 255), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(0, 255, 255), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 255, 255), 0, 5, 0);
 			}			
 			if (meanr.val[0] < r1 && meanr.val[1] < r2 && meanr.val[2] > r3) {
 				// Label each target found
 				colour = "Red";
 				putText(imageFinal, colour, org, font, scale, Scalar(0, 0, 255), thick, 5);
 				// Highlight each target with designating colour and mark the center points
-				circle(imageFinal, center, radius, Scalar(0, 0, 255), 1, 5, 0);
-				circle(imageFinal, center, 3, Scalar(0, 0, 255), 1, 5, 0);
+				circle(imageFinal, center, radius, Scalar(0, 0, 255), 0, 5, 0);
+				circle(imageFinal, center, 3, Scalar(0, 0, 255), 0, 5, 0);
 			}
 		}
 	}
