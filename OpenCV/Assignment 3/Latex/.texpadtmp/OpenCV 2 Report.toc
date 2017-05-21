@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}INTRODUCTION}{1}
+\contentsline {section}{\numberline {2}METHOD}{1}
+\contentsline {subsection}{\numberline {2.1}BGR to HSV conversion}{3}
+\contentsline {subsection}{\numberline {2.2}Gaussian Blur}{3}
+\contentsline {subsection}{\numberline {2.3}Canny edge detection}{3}
+\contentsline {subsection}{\numberline {2.4}Dilation \& Erosion}{4}
+\contentsline {subsection}{\numberline {2.5}Contours}{4}
+\contentsline {subsection}{\numberline {2.6}Bounding Rectangles \& Approximate Contours to Polygons}{4}
+\contentsline {subsection}{\numberline {2.7}Drawing Contours, Rotated Rectangles \& Center circles with Axis}{5}
+\contentsline {subsection}{\numberline {2.8}Translation}{5}
+\contentsline {section}{\numberline {3}RESULTS}{6}
+\contentsline {section}{\numberline {4}OUTCOMES}{8}
+\contentsline {subsection}{\numberline {4.1}Fine Tuning}{8}
+\contentsline {subsection}{\numberline {4.2}Testing}{8}
+\contentsline {subsection}{\numberline {4.3}Finalising}{8}
+\contentsline {section}{\numberline {5}CONCLUSIONS}{9}
+\contentsline {subsection}{\numberline {5.1}Critical Evaluation and Methodology}{9}
+\contentsline {subsection}{\numberline {5.2}Discussion}{9}
