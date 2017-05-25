@@ -1,0 +1,84 @@
+path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 2 1;1.5 2 0;1.5 0 0;1.5 0 1;1.5 1 1;2.5 2 1;2.5 2 0;1.5 1 0;2.5 0 0;2.5 0 1]
+p=mstraj(path,[.5 .5 .5],[],[0 0 1],0.02,0.2)
+
+plot3(p(:,1),p(:,2),p(:,3))
+xlabel('x displacement'); ylabel('y displacement'); zlabel('z displacement');title('XYZ plot')
+
+T = transl(0.1*p)
+T_Final = homtrans(transl(0.4,0,0),T)
+
+mdl_puma560
+p560.tool = trotx(pi)
+q = p560.ikine6s(T_Final)
+t = [0:0.001:2.409]'
+
+plot(t,q)
+xlabel('Time(s)'); ylabel('Joint Angle(Rad)');title('Joint Angle VS Time')
+legend('Joint 1','Joint 2','Joint 3','Joint 4','Joint 5','Joint 6')
+
+% plot(t,tr2rpy(T_Final))
+% xlabel('Time(s)'); ylabel('Orientation(Rad)');title('XYZRPY Plot')
+% legend('Roll','Pitch','Yaw')
+
+fig = figure('visible','on');
+filename = 'Test_1.avi';
+mov.frames = getframe(fig);
+writerObj = VideoWriter('Test_1.avi');
+open(writerObj);
+for i=1:2000,
+    p560.plot(gait(q,i,0,0))
+    drawnow;
+    frames(i) = getframe(fig);
+    writeVideo(writerObj,frames);
+end
+close(writerObj);
+
+% % Load in trejectory
+% % path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 2 1;1.5 2 0;1.5 0 0;2.5 0 0; 2.5 0 1;4 2 1;4 2 0;3 2 0;3 0 0;4 0 0;4 0 1;3 1 1;3 1 0;4 1 0;4 1 1;4.5 2 1;4.5 2 0;5.5 0 0;5.5 0 1;5.5 2 1;5.5 2 0;4.5 0 0;4.5 0 1;]
+% % point = mstraj(path,[.5 .5 .5],[],[0 0 1],0.02,0.2)
+% 
+% % Plot 3D trajectory
+% path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 2 1;1.5 2 0;1.5 0 0;1.5 0 1;1.5 1 1;2.5 2 1;2.5 2 0;1.5 1 0;2.5 0 0;2.5 0 1]
+% point=mstraj(path,[.5 .5 .5],[],[0 0 1],0.02,0.2)
+% 
+% % Part B: A plot of the end effector trajectory in 3 Dimensions (X,Y,Z)
+% plot3(point(:,1),point(:,2),point(:,3))
+% xlabel('x'); ylabel('y'); zlabel('z');title('trajectory')
+% 
+% T = transl(0.1*point)
+% Transform = homtrans(transl(0.4,0,0),T)
+% 
+% % Using Peter Corke's robotics toolbox, as the avaliable mdl_puma560 is already
+% % done for us
+% mdl_puma560
+% p560.tool = trotx(pi)
+% angle = p560.ikine6s(Transform)
+% time = [0:0.001:2.409]'
+% 
+% % Part C: A plot showing each of the joint angles with respect to time
+% plot(time,angle)
+% xlabel('time(s)'); ylabel('joint angle (rad)');title('joint angle / time')
+% legend('J1','J2','J3','J4','J5','J6')
+% 
+% % Part D: A plot showing XYZRPY magnitudes with respect to time.
+% % plot(time,tr2rpy(Transform))
+% % xlabel('time (s)'); ylabel('orientation (rad)');title('xyz, roll, pitch, yaw')
+% % legend('Roll','Pitch','Yaw')
+% 
+% % A video file that shows the robot simulation
+% video = figure('visible','on');
+% mov.frame = getframe(video);
+% 
+% filename = 'Demo';
+% % writerObj.CompressionRatio = 3;
+% writerObj = VideoWriter('Demo', 'MPEG-4');
+% 
+% 
+% open(writerObj);
+% for i = 1:2000,
+%     p560.plot(gait(angle,i,0,0))
+%     drawnow;
+%     frame(i) = getframe(video);
+%     writeVideo(writerObj,frame);
+% end
+% close(writerObj);
