@@ -1,10 +1,10 @@
 % Load in trejectory
 
-% Initials
-% path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 0.5 1;1.5 0.5 0;1.5 0 0;2.5 0 0;2.5 0.5 0;1.5 1.5 0;1.5 2 0;2.5 2 0;2.5 1.5 0;2.5 1.5 1;]
+% Initials AS
+path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 0.5 1;1.5 0.5 0;1.5 0 0;2.5 0 0;2.5 0.5 0;1.5 1.5 0;1.5 2 0;2.5 2 0;2.5 1.5 0;2.5 1.5 1;]
 
-% Name
-path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 2 1;1.5 2 0;1.5 0 0;2.5 0 0; 2.5 0 1;4 2 1;4 2 0;3 2 0;3 0 0;4 0 0;4 0 1;3 1 1;3 1 0;4 1 0;4 1 1;4.5 2 1;4.5 2 0;5.5 0 0;5.5 0 1;5.5 2 1;5.5 2 0;4.5 0 0;4.5 0 1;]
+% Name ALEX
+% path = [0 0 1;0 0 0;0 2 0;1 2 0;1 0 0;1 0 1;0 1 1;0 1 0;1 1 0;1 1 1;1.5 2 1;1.5 2 0;1.5 0 0;2.5 0 0; 2.5 0 1;4 2 1;4 2 0;3 2 0;3 0 0;4 0 0;4 0 1;3 1 1;3 1 0;4 1 0;4 1 1;4.5 2 1;4.5 2 0;5.5 0 0;5.5 0 1;5.5 2 1;5.5 2 0;4.5 0 0;4.5 0 1;]
 
 % TRAJ = MSTRAJ(P, QDMAX, TSEG, Q0, DT, TACC, OPTIONS)
 % trajectory = mstraj(path,[speedx speedy speedz],[],[initx inity initz],sampleperiod,acceltime)
@@ -38,18 +38,19 @@ Transform = homtrans(transl(0.4,0,0),traj) % HomoTrans Pose (0.4,0,0) (pose1,pos
 mdl_puma560
 p560.tool = trotx(pi)
 angle = p560.ikine6s(Transform) % 50 x poses consisting of 6 joint angles, inverse kinematic of the transform
-time = [0:0.05:2]' % 2 Seconds, 50 ms period
+time = [0:0.01:20.59]' % 2 Seconds, 50 ms period
 % The ? causes the vector to be transposed
 
 % total_time = timesteps * step time
 % total_time = numrows(p)*0.02 
+% Total Time = 32 points * 0.02 = 0.64
 
 % p560.tool = trotx(pi)
 % q = p560.ikine6s(T_Final)
 % p560.plot(q)
 
 % Part C: A plot showing each of the joint angles with respect to time
-subplot(3,1,2), p560.plot(time,angle)
+subplot(3,1,2), plot(time,angle)
 xlabel('time(s)'); ylabel('joint angle (rad)');title('joint angle / time')
 legend('J1','J2','J3','J4','J5','J6')
 
@@ -61,21 +62,19 @@ legend('Roll','Pitch','Yaw')
 % A video file that shows the robot simulation
 fig = figure('visible','on');
 
-fps = 25;
+fps = 100;
 n_samples = 5 * fps;
 
 mov.frames = getframe(fig);
 
-filename = 'Demo';
+filename = 'Demo.avi';
 % writerObj.CompressionRatio = 3;
-writerObj = VideoWriter('Demo', 'MPEG-4', 'fps', 3);
-
-
+writerObj = VideoWriter('Demo.avi');
 open(writerObj);
-for i = 1:2000,
-    p560.plot(gait(angle,i,0,0));
-    drawnow;
+for i = 1:2060, % 50*0.02 * secconds (0.64)
+    p560.plot(gait(angle,i,0,0))
+    drawnow
     frames(i) = getframe(fig);
-    writeVideo(writerObj,frames);
+    writeVideo(writerObj,frames)
 end
 close(writerObj);

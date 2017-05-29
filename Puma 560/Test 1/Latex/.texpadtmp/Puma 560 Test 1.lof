@@ -1,1 +1,4 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces A plot of the end effector trajectory in 3 Dimensions (X,Y,Z)}}{1}
+\contentsline {figure}{\numberline {1}{\ignorespaces A plot of the end effector name trajectory in 3 Dimensions (X,Y,Z)}}{1}
+\contentsline {figure}{\numberline {2}{\ignorespaces A plot of the end effector initials trajectory in 3 Dimensions (X,Y,Z)}}{1}
+\contentsline {figure}{\numberline {3}{\ignorespaces A plot showing each of the joint angles with respect to time}}{2}
+\contentsline {figure}{\numberline {4}{\ignorespaces A plot showing XYZRPY magnitudes with respect to time}}{2}

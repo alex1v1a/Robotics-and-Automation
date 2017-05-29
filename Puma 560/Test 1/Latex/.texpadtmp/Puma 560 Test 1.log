@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  27 MAY 2017 00:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.12)  29 MAY 2017 14:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -299,32 +299,57 @@ File: images/T2.png Graphic file (type png)
  <use images/T2.png>
 Package pdftex.def Info: images/T2.png used on input line 70.
 (pdftex.def)             Requested size: 452.9679pt x 241.97783pt.
+ <images/AS.png, id=23, 656.4525pt x 331.2375pt>
+File: images/AS.png Graphic file (type png)
+ <use images/AS.png>
+Package pdftex.def Info: images/AS.png used on input line 76.
+(pdftex.def)             Requested size: 452.9679pt x 228.56422pt.
+ <images/angle.png, id=24, 649.42625pt x 305.14pt>
+File: images/angle.png Graphic file (type png)
+ <use images/angle.png>
+Package pdftex.def Info: images/angle.png used on input line 86.
+(pdftex.def)             Requested size: 452.9679pt x 212.83759pt.
  [1
 
- <./images/T2.png>] (/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.bbl
+ <./images/T2.png> <./images/AS.png>] <images/ore.png, id=30, 509.905pt x 246.9225pt>
+File: images/ore.png Graphic file (type png)
+ <use images/ore.png>
+Package pdftex.def Info: images/ore.png used on input line 96.
+(pdftex.def)             Requested size: 452.9679pt x 219.36093pt.
+ [2 <./images/angle.png> <./images/ore.png>] (/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+) [3
+
+] (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-) [2] (/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.aux) ) 
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 181.
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [4
+
+] [5] (/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.aux) ) 
 Here is how much of TeX's memory you used:
- 4831 strings out of 493014
- 71523 string characters out of 6133351
- 166659 words of memory out of 5000000
- 8289 multiletter control sequences out of 15000+600000
+ 5187 strings out of 493014
+ 75506 string characters out of 6133351
+ 390920 words of memory out of 5000000
+ 8643 multiletter control sequences out of 15000+600000
  8837 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,60p,573b,1019s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on "/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.pdf" (4 pages, 304637 bytes).
+ 38i,11n,60p,573b,1592s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on "/Users/FLCL/Documents/University 2017/Robotics-and-Automation/Puma 560/Test 1/Latex/.texpadtmp/Puma 560 Test 1.pdf" (7 pages, 391561 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
