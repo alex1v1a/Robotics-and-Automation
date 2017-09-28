@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{OpenCV.org}
+http://docs.opencv.org/2.4/, ``Opencv resources,'' 2015.
+
+\bibitem{OpenCV}
+http://docs.opencv.org/2.4/ modules/ core/ doc/~basic structures, ``Object
+  detection,'' 2015.
+
+\bibitem{frascarelli2015object}
+A.~E. Frascarelli, ``Object detection,'' 2015.
+
+\bibitem{ramon2014using}
+M.~C. Ramon, ``Using opencv,'' in {\em Intel{textregistered} Galileo and
+  Intel{textregistered} Galileo Gen 2}, pp.~319--400, Springer, 2014.
+
+\bibitem{frascarelli2015}
+A.~E. Frascarelli, ``Object detection for high productivity,'' {\em 3345},
+  2015.
+
+\bibitem{myint2015tracking}
+H.~Myint, P.~Wong, L.~Dooley, and A.~Hopgood, ``Tracking a table tennis ball
+  for umpiring purposes,'' in {\em Machine Vision Applications (MVA), 2015 14th
+  IAPR International Conference on}, pp.~170--173, IEEE, 2015.
+
+\bibitem{budden2012novel}
+D.~Budden, S.~Fenn, J.~Walker, and A.~Mendes, ``A novel approach to ball
+  detection for humanoid robot soccer,'' in {\em Australasian Joint Conference
+  on Artificial Intelligence}, pp.~827--838, Springer, 2012.
+
+\end{thebibliography}
